@@ -24,6 +24,36 @@ module Slack
           end
 
           #
+          # Create a new comment on a file
+          #
+          # @option options [file] :file
+          #   File containing the comment to edit.
+          # @option options [Object] :comment
+          #   Text of the comment to edit.
+          # @see https://api.slack.com/methods/files.comments.add
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.comments.add.json
+          def files_comments_add(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            throw ArgumentError.new('Required arguments :comment missing') if options[:comment].nil?
+            post('files.comments.add', options)
+          end
+
+          #
+          # This method deletes a comment from a file
+          #
+          # @option options [file] :file
+          #   File containing the comment to delete.
+          # @option options [Object] :id
+          #   The comment to delete.
+          # @see https://api.slack.com/methods/files.comments.delete
+          # @see https://github.com/dblock/slack-api-ref/blob/master/methods/files/files.comments.delete.json
+          def files_comments_delete(options = {})
+            throw ArgumentError.new('Required arguments :file missing') if options[:file].nil?
+            throw ArgumentError.new('Required arguments :id missing') if options[:id].nil?
+            post('files.comments.delete', options)
+          end
+
+          #
           # This method deletes a file from your team.
           #
           # @option options [file] :file
